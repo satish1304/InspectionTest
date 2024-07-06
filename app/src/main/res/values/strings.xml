@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Inspection</string>
+    <string name="menu_draft_inspection">Draft Inspection</string>
+    <string name="menu_completed_inspection">Completed Inspection</string>
+    <string name="menu_upcoming_inspection">Upcoming Inspection</string>
+
 </resources>

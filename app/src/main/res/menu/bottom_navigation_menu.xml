@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/draft_inspection_menu"
+        android:enabled="true"
+        android:icon="@drawable/icon_draft_inspection"
+        android:title="@string/menu_draft_inspection"/>
+
+    <item
+        android:id="@+id/completed_inspection_menu"
+        android:enabled="true"
+        android:icon="@drawable/icon_completed_inspection"
+        android:title="@string/menu_completed_inspection"/>
+
+    <item
+        android:id="@+id/upcoming_inspection_menu"
+        android:enabled="true"
+        android:icon="@drawable/icon_upcoming_inspection"
+        android:title="@string/menu_upcoming_inspection"/>
+
+</menu>

@@ -1,0 +1,38 @@
+package com.example.inspection.view
+
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.inspection.R
+import com.example.inspection.databinding.FragmentUpcomingInspectionBinding
+import com.example.inspection.view.adapter.InspectionAdapter
+import com.example.inspection.viewmodel.InspectionViewModel
+
+class UpcomingInspectionFragment : Fragment() {
+
+    private val  inspectionViewModel by lazy {
+        InspectionViewModel(this.requireActivity().application)
+    }
+
+    private lateinit var binding : FragmentUpcomingInspectionBinding
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        binding = FragmentUpcomingInspectionBinding.inflate(layoutInflater,container,false)
+        init()
+        return binding.root
+    }
+
+    private fun init(){
+        inspectionViewModel.getInspectionListFromDB()
+        binding.recyclerViewUpcomingInspection.layoutManager = LinearLayoutManager(this.requireContext())
+        val inspectionAdapter = InspectionAdapter(inspectionViewModel.inspectionListLiveData.value ?: emptyList())
+        binding.recyclerViewUpcomingInspection.adapter = inspectionAdapter
+
+        inspectionViewModel.inspectionListLiveData.observe(viewLifecycleOwner) {
+            inspectionAdapter.updateItems(it)
+        }
+    }
+}

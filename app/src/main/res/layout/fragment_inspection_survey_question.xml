@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/tvInspectionAreaLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Category :"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/tvInspectionArea"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="General Ward"
+        android:layout_marginStart="10dp"
+        app:layout_constraintStart_toEndOf="@id/tvInspectionAreaLabel"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/tvInspectionTypeLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Inspection Type :"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvInspectionAreaLabel"/>
+
+    <TextView
+        android:id="@+id/tvInspectionType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Clinical"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toEndOf="@id/tvInspectionTypeLabel"
+        app:layout_constraintTop_toBottomOf="@id/tvInspectionArea"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

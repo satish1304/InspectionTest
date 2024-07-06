@@ -1,6 +1,9 @@
+import com.github.javaparser.printer.lexicalpreservation.DifferenceElement.kept
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    id("kotlin-kapt")
 }
 
 android {
@@ -34,6 +37,11 @@ android {
             )
         }
     }
+
+    buildFeatures {
+        viewBinding = true
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -45,10 +53,43 @@ android {
 
 dependencies {
 
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.material)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
+    implementation("androidx.core:core-ktx:1.10.1")
+    implementation("androidx.appcompat:appcompat:1.6.1")
+    implementation("com.google.android.material:material:1.9.0")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
+    implementation("androidx.activity:activity-ktx:1.8.0")
+
+    // Room dependencies
+    implementation("androidx.room:room-runtime:2.5.0")
+    kapt("androidx.room:room-compiler:2.5.1")
+    implementation("androidx.room:room-ktx:2.5.1")
+
+    //ViewModel
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
+    //liveData
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.1")
+    // Lifecycles only (without ViewModel or LiveData)
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
+
+    //retrofit
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("com.squareup.retrofit2:converter-scalars:2.9.0")
+    implementation("com.squareup.retrofit2:adapter-rxjava2:2.9.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
+
+
+    // Testing dependencies
+    testImplementation("junit:junit:4.13.2")
+    androidTestImplementation("androidx.test.ext:junit:1.1.5")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+
 }
+
+kapt {
+    correctErrorTypes = true
+}
+
+
+

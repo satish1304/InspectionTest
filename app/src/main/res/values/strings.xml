@@ -2,6 +2,8 @@
     <string name="app_name">Inspection</string>
     <string name="menu_draft_inspection">Draft Inspection</string>
     <string name="menu_completed_inspection">Completed Inspection</string>
-    <string name="menu_upcoming_inspection">Upcoming Inspection</string>
+    <string name="menu_user_profile">User Profile</string>
+    <string name="warning_no_draft_inspection">Opps!! no draft inspection found. Please click on \"Start Inspection\" button to start new inspection</string>
+    <string name="warning_no_completed_inspection">Opps!! no completed inspection found. Please complete draft inspection or start new inspection</string>
 
 </resources>

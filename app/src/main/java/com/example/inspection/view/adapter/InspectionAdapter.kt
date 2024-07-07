@@ -6,13 +6,29 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.inspection.databinding.InspectionListItemBinding
 import com.example.inspection.room.entity.Inspection
 
-class InspectionAdapter(private var inspectionList: List<Inspection>) : RecyclerView.Adapter<InspectionAdapter.InspectionViewHolder>(){
+class InspectionAdapter(private var inspectionList: List<Inspection>,private val itemClickListener: OnItemClickListener) : RecyclerView.Adapter<InspectionAdapter.InspectionViewHolder>(){
 
-    class InspectionViewHolder(private val binding: InspectionListItemBinding) : RecyclerView.ViewHolder(binding.root) {
+
+   inner class InspectionViewHolder(private val binding: InspectionListItemBinding) : RecyclerView.ViewHolder(binding.root) {
         // ViewHolder
         fun bind(inspection: Inspection) {
-            binding.tvInspectionArea.text = inspection.area?.name
-            binding.tvInspectionType.text = inspection.inspectionType?.name
+            binding.tvInspectionArea.text = inspection.area.name
+            binding.tvInspectionType.text = inspection.inspectionType.name
+            if(inspection.completed) {
+                binding.tvInspectionScore.text = "Score : ${inspection.score.toString()}"
+                binding.tvInspectionScore.visibility = RecyclerView.VISIBLE
+                binding.tvInspectionDate.visibility = RecyclerView.VISIBLE
+                binding.tvInspectionDate.text = "Completed on : ${inspection.inspectionDate}"
+            }else{
+                binding.tvInspectionScore.visibility = RecyclerView.GONE
+                binding.tvInspectionDate.visibility = RecyclerView.GONE
+            }
+        }
+
+        init {
+            binding.root.setOnClickListener {
+                itemClickListener.onItemClick(inspectionList[adapterPosition])
+            }
         }
     }
 
@@ -37,4 +53,10 @@ class InspectionAdapter(private var inspectionList: List<Inspection>) : Recycler
         inspectionList = newItems
         notifyDataSetChanged()
     }
+
+    interface OnItemClickListener {
+        fun onItemClick(inspection: Inspection)
+    }
+
+
 }

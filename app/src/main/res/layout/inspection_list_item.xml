@@ -4,31 +4,57 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="5dp"
-    app:cardCornerRadius="5dp"
-    >
+    app:cardCornerRadius="5dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/teal_700"
+        android:background="@color/green_light"
         android:padding="10dp">
 
      <TextView
          android:id="@+id/tvInspectionArea"
-         android:layout_width="match_parent"
+         android:layout_width="wrap_content"
          android:layout_height="wrap_content"
-         android:text="Emergency ICU"
-         android:textSize="15sp"
+         android:text="Barton Ward"
+         android:textSize="12sp"
          android:textStyle="bold"
+         android:textColor="@color/black"
+         app:layout_constraintStart_toStartOf="parent"
          app:layout_constraintTop_toTopOf="parent"/>
 
-        <TextView
+      <TextView
             android:id="@+id/tvInspectionType"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:text="Clinical Inspection"
+            android:text="Clinical"
+          android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvInspectionArea"/>
+
+        <TextView
+            android:id="@+id/tvInspectionScore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:text="Score: 10.5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+
+        <TextView
+            android:id="@+id/tvInspectionDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/black"
+            android:text="DateTime : 2021-07-01 10:00:00"
+            app:layout_constraintTop_toBottomOf="@id/tvInspectionType"
+            app:layout_constraintStart_toStartOf="parent" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -13,9 +13,9 @@
         android:title="@string/menu_completed_inspection"/>
 
     <item
-        android:id="@+id/upcoming_inspection_menu"
+        android:id="@+id/user_profile"
         android:enabled="true"
         android:icon="@drawable/icon_upcoming_inspection"
-        android:title="@string/menu_upcoming_inspection"/>
+        android:title="@string/menu_user_profile"/>
 
 </menu>

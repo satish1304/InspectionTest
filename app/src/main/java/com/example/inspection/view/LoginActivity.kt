@@ -1,4 +1,4 @@
-package com.example.inspection
+package com.example.inspection.view
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.example.inspection.databinding.ActivityLoginBinding
 import com.example.inspection.room.entity.User
-import com.example.inspection.view.DashboardActivity
 import com.example.inspection.viewmodel.LoginViewModel
 
 class LoginActivity : AppCompatActivity(){
@@ -23,13 +22,12 @@ class LoginActivity : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setSupportActionBar(binding.myToolbar)
+        supportActionBar?.title = "Login"
 
         binding.btnLogin.setOnClickListener {
 
             if(!validateInputs()){
-                val intent = Intent(this, DashboardActivity::class.java)
-                startActivity(intent)
-                finish()
                 return@setOnClickListener
             }
 
@@ -37,24 +35,30 @@ class LoginActivity : AppCompatActivity(){
             val password = binding.etPassword.text.toString()
 
             loginViewModel.callLoginAPI(email, password)
+
             loginViewModel.loginResponseCd.observe(this, Observer {
                 Log.d("LoginActivity", "Response: $it")
                 if(it==200){
-                    val user = User(0,email, password)
+                    val user = User(0, email, password)
                     loginViewModel.insert(user)
                     val intent = Intent(this, DashboardActivity::class.java)
+                    intent.putExtra("email", email)
                     startActivity(intent)
                     finish()
                 }else{
-                    Toast.makeText(this, "User already exists", Toast.LENGTH_SHORT).show()
-                    //Invalid user or password
+                    Toast.makeText(this, "User does not exist or the credentials are incorrect", Toast.LENGTH_SHORT).show()
                 }
             })
         }
 
+        binding.tvRegister.setOnClickListener {
+            val intent = Intent(this, RegisterActivity::class.java)
+            startActivity(intent)
+        }
+
     }
 
-    fun validateInputs(): Boolean {
+    private fun validateInputs(): Boolean {
         if(binding.etEmail.text.toString().isEmpty()){
             binding.etEmail.error = "Email cannot be empty"
             return false

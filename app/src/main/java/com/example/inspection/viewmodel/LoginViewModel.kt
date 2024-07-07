@@ -24,14 +24,7 @@ class LoginViewModel(application:Application) : AndroidViewModel(application) {
     val loginResponseCd: LiveData<Int>
         get() = loginRepository.loginResponse
 
-     fun validateUser(email: String, password: String) : Boolean{
-        var isValidUser = false
-         viewModelScope.launch {
-             isValidUser = loginRepository.validateUser(email, password)
-         }
 
-        return isValidUser
-     }
 
      fun insert(user: User) = viewModelScope.launch(Dispatchers.IO){
          loginRepository.insert(user)
@@ -41,21 +34,21 @@ class LoginViewModel(application:Application) : AndroidViewModel(application) {
         viewModelScope.launch {
           try {
               loginRepository.loginUser(email, password)
-             /* RetrofitInstance.api.registerUser(loginRequest).enqueue(object : Callback<ResponseBody?> {
-                override fun onResponse(call: Call<ResponseBody?>, response: Response<ResponseBody?>) {
-                    // Handle the response
-                    Log.d("LoginViewModel", "Response: ${response.code()}")
-                }
-
-                override fun onFailure(call: Call<ResponseBody?>, t: Throwable) {
-                    // Handle the failure
-                    Log.d("LoginViewModel", "Error: ${t.message}")
-                }
-            })*/
-
           }catch (e: Exception){
                 e.printStackTrace()
           }
+
+        }
+
+    }
+
+    fun callRegisterAPI(email:String, password:String){
+        viewModelScope.launch {
+            try {
+                loginRepository.registerUser(email, password)
+            }catch (e: Exception){
+                e.printStackTrace()
+            }
 
         }
 

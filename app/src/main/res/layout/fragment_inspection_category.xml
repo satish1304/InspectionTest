@@ -27,7 +27,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="Inspection Type :"
+        android:text="Inspection Type : "
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvInspectionAreaLabel"/>
 
@@ -42,13 +42,23 @@
         app:layout_constraintTop_toBottomOf="@id/tvInspectionArea"
         />
 
+    <TextView
+        android:id="@+id/tvInspectionCategoryLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Inspection Category"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvInspectionTypeLabel"
+        />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewInspectionCategory"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvInspectionTypeLabel"/>
+        app:layout_constraintTop_toBottomOf="@id/tvInspectionCategoryLabel"/>
 
 
 

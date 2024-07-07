@@ -4,25 +4,77 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/myToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:layout_constraintTop_toTopOf="parent"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar" />
+
+
     <TextView
-        android:id="@+id/tvInspection"
+        android:id="@+id/tvInspectionAreaLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Inspection Area :"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/myToolbar"/>
 
     <TextView
-        android:id="@+id/tvName"
+        android:id="@+id/tvInspectionArea"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Inspection Area"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        android:text="General Ward"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toEndOf="@id/tvInspectionAreaLabel"
+        app:layout_constraintTop_toBottomOf="@id/myToolbar"/>
 
-    <FrameLayout
+    <TextView
+        android:id="@+id/tvInspectionTypeLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
+        android:text="Inspection Type : "
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvInspectionAreaLabel"/>
+
+    <TextView
+        android:id="@+id/tvInspectionType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Clinical"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toEndOf="@id/tvInspectionTypeLabel"
+        app:layout_constraintTop_toBottomOf="@id/tvInspectionArea"
+        />
+
+    <TextView
+        android:id="@+id/tvInspectionCategoryLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Inspection Category"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvInspectionTypeLabel"
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewInspectionCategory"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvInspectionCategoryLabel"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

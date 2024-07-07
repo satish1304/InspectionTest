@@ -12,7 +12,7 @@ interface UserDao {
     @Insert
     fun insertUser(vararg user: User)
 
-    @SuppressWarnings(RoomWarnings.CURSOR_MISMATCH)
-    @Query("SELECT * FROM users WHERE email = :email AND password = :password")
-    fun validateUser(email: String, password: String) : User
+   /* @SuppressWarnings(RoomWarnings.CURSOR_MISMATCH)
+    @Query("SELECT id,email,password FROM users WHERE email = :email AND password = :password")
+    fun validateUser(email: String, password: String) : User*/
 }

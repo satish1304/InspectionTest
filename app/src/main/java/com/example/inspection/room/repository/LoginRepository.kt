@@ -21,18 +21,25 @@ class LoginRepository(private val userDao: UserDao) {
     }
 
 
-     fun validateUser(email: String, password: String) : Boolean {
-         val user = userDao.validateUser(email, password)
-        return user.email == email && user.password == password
-    }
-
     suspend fun loginUser(email: String, password: String) {
         // Call the API and update the response
         try {
-          val result = RetrofitInstance.api.registerUser(LoginRequest(email, password))
+          val result = RetrofitInstance.api.loginUser(LoginRequest(email, password))
           if(result.code()!=0){
               mLoginResponse.postValue(result.code())
           }
+        }catch (e: Exception){
+            e.printStackTrace()
+        }
+    }
+
+    suspend fun registerUser(email: String, password: String) {
+        // Call the API and update the response
+        try {
+            val result = RetrofitInstance.api.registerUser(LoginRequest(email, password))
+            if(result.code()!=0){
+                mLoginResponse.postValue(result.code())
+            }
         }catch (e: Exception){
             e.printStackTrace()
         }

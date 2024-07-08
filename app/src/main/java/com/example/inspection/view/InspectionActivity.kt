@@ -53,6 +53,12 @@ class InspectionActivity : AppCompatActivity(){
         binding.recyclerViewInspectionCategory.adapter = inspectionCategoryAdapter
 
         binding.btnSubmitInspection.setOnClickListener {
+
+            if(AppUtils.isNetworkAvailable(this)){
+                Toast.makeText(this, "No internet connection", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
             inspection.survey = Survey(categoryList)
             val submitRequest = InspectionSubmitRequest(inspection)
             inspectionViewModel.submitInspection(submitRequest)

@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.example.inspection.databinding.ActivityLoginBinding
+import com.example.inspection.utils.AppUtils
 import com.example.inspection.viewmodel.LoginViewModel
 
 class RegisterActivity : AppCompatActivity(){
@@ -32,6 +33,11 @@ class RegisterActivity : AppCompatActivity(){
         binding.btnLogin.setOnClickListener {
 
             if(!validateInputs()){
+                return@setOnClickListener
+            }
+
+            if(AppUtils.isNetworkAvailable(this)){
+                Toast.makeText(this, "No internet connection", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 

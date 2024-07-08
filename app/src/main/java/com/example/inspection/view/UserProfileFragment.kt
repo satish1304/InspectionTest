@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.inspection.databinding.FragmentUserProfileBinding
+import com.example.inspection.utils.AppUtils
 import com.example.inspection.viewmodel.InspectionViewModel
 
 class UserProfileFragment : Fragment() {
@@ -35,6 +36,10 @@ class UserProfileFragment : Fragment() {
         }
 
         binding.btnRandomInspection.setOnClickListener {
+            if(AppUtils.isNetworkAvailable(this.requireContext())){
+                Toast.makeText(activity, "No internet connection", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
             inspectionViewModel.getRandomInspection()
             Toast.makeText(requireContext(), "Random inspection saved into Draft Inspection", Toast.LENGTH_SHORT).show()
         }

@@ -5,11 +5,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.inspection.R
 import com.example.inspection.databinding.FragmentDraftInspectionBinding
 import com.example.inspection.room.entity.Inspection
+import com.example.inspection.utils.AppUtils
 import com.example.inspection.view.adapter.InspectionAdapter
 import com.example.inspection.viewmodel.InspectionViewModel
 
@@ -32,6 +34,10 @@ class DraftInspectionFragment : Fragment() {
         inspectionViewModel.getInspectionListFromDB(false)
 
         binding.btnStartInspection.setOnClickListener {
+            if(AppUtils.isNetworkAvailable(this.requireContext())){
+                Toast.makeText(activity, "No internet connection", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
             inspectionViewModel.startInspection()
         }
 

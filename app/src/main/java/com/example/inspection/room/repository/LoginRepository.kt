@@ -7,6 +7,7 @@ import com.example.inspection.network.LoginRequest
 import com.example.inspection.network.RetrofitInstance
 import com.example.inspection.room.dao.UserDao
 import com.example.inspection.room.entity.User
+import com.example.inspection.utils.AppUtils
 
 class LoginRepository(private val userDao: UserDao) {
     private val mLoginResponse = MutableLiveData<Int>()

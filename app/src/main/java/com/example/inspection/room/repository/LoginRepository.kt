@@ -30,6 +30,7 @@ class LoginRepository(private val userDao: UserDao) {
           }
         }catch (e: Exception){
             e.printStackTrace()
+            mLoginResponse.postValue(0)
         }
     }
 

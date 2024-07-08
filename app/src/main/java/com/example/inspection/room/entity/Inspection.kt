@@ -33,5 +33,5 @@ data class Inspection(
     val area : Area,
     @ColumnInfo(name = "survey")
     @SerializedName("survey")
-    val survey : Survey
+    var survey : Survey
 ) : Parcelable

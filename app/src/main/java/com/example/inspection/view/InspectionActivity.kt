@@ -3,12 +3,14 @@ package com.example.inspection.view
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.inspection.databinding.ActivityInspectionBinding
 import com.example.inspection.model.Categories
 import com.example.inspection.model.Survey
+import com.example.inspection.network.InspectionSubmitRequest
 import com.example.inspection.room.entity.Inspection
 import com.example.inspection.utils.AppUtils
 import com.example.inspection.view.adapter.InspectionCategoryAdapter
@@ -49,6 +51,33 @@ class InspectionActivity : AppCompatActivity(){
             }
         })
         binding.recyclerViewInspectionCategory.adapter = inspectionCategoryAdapter
+
+        binding.btnSubmitInspection.setOnClickListener {
+            inspection.survey = Survey(categoryList)
+            val submitRequest = InspectionSubmitRequest(inspection)
+            inspectionViewModel.submitInspection(submitRequest)
+            inspectionViewModel.submitInspectionResponseCd.observe(this) {
+                if (it == 200) {
+                    // Show success message
+                    Toast.makeText(
+                        this@InspectionActivity,
+                        "Inspection submitted successfully",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    inspectionViewModel.updateInspectionCompleted(
+                        inspection.id,
+                        AppUtils.getCurrentDateTime()
+                    )
+                    finish()
+                } else {
+                    // Show error message
+                    Toast.makeText(this@InspectionActivity,
+                        "Failed to submit inspection",
+                        Toast.LENGTH_SHORT).show()
+                }
+            }
+
+        }
     }
 
     @Deprecated("Deprecated in Java")
@@ -61,8 +90,7 @@ class InspectionActivity : AppCompatActivity(){
             val survey = Survey(categoryList)
             inspection.id.let { inspectionViewModel.updateInspectionCategory(survey,inspectionViewModel.calculateScore(category), it) }
             if(submittedCategoryCount == categoryList.size){
-                inspectionViewModel.updateInspectionCompleted(inspection.id,AppUtils.getCurrentDateTime())
-                finish()
+                binding.btnSubmitInspection.visibility = android.view.View.VISIBLE
             }
         }
     }

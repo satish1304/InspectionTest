@@ -15,7 +15,7 @@
     <item
         android:id="@+id/user_profile"
         android:enabled="true"
-        android:icon="@drawable/icon_upcoming_inspection"
+        android:icon="@drawable/icon_user_profile"
         android:title="@string/menu_user_profile"/>
 
 </menu>

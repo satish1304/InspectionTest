@@ -3,10 +3,12 @@ package com.example.inspection.viewmodel
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.inspection.model.Categories
 import com.example.inspection.model.Survey
+import com.example.inspection.network.InspectionSubmitRequest
 import com.example.inspection.network.RetrofitInstance
 import com.example.inspection.room.AppDatabase
 import com.example.inspection.room.entity.Inspection
@@ -18,23 +20,34 @@ class InspectionViewModel(application: Application) : AndroidViewModel(applicati
 
     private val inspectionDao = AppDatabase.getInstance(application).inspectionDao()
     private val inspectionRepository = InspectionRepository(inspectionDao)
+    val submitInspectionResponseCd: LiveData<Int>
+        get(){
+            return inspectionRepository.submitInspectionResponse
+        }
+
     val inspectionListLiveData : MutableLiveData<List<Inspection>>
         get() {
             return inspectionRepository.inspectionListLiveData
         }
+
 
     fun startInspection() {
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val response = RetrofitInstance.api.startInspection()
                 inspectionRepository.insertInspection(response.inspection)
-                //getInspectionListFromDB(false)
                 val inspectionList = inspectionListLiveData.value as ArrayList
                 inspectionList.add(response.inspection)
                 inspectionListLiveData.postValue(inspectionList)
             }catch (e: Exception){
                 e.printStackTrace()
             }
+        }
+    }
+
+    fun submitInspection(inspectionSubmitRequest : InspectionSubmitRequest) {
+        viewModelScope.launch(Dispatchers.IO) {
+            inspectionRepository.submitInspection(inspectionSubmitRequest)
         }
     }
 
@@ -66,23 +79,7 @@ class InspectionViewModel(application: Application) : AndroidViewModel(applicati
                 }
             }
         }
-        Log.d("inspectionModel", "Score: $score")
         return score
     }
-
-
-/*    fun getInspectionListAPI() {
-        viewModelScope.launch {
-            try {
-                val response = RetrofitInstance.api.getInspection()
-                response.forEach { inspection ->
-                    // Save the inspection data to the local database
-                    inspection.name
-                }
-            }catch (e: Exception){
-                e.printStackTrace()
-            }
-        }
-    }*/
 
 }

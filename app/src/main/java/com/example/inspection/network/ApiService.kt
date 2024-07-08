@@ -20,5 +20,5 @@ interface ApiService {
     suspend fun loginUser(@Body loginRequest: LoginRequest) : Response<ResponseBody>
 
     @POST("api/inspections/submit")
-    suspend fun saveInspection(@Body inspection: Inspection): InspectionResponse
+    suspend fun submitInspection(@Body inspectionSubmitRequest : InspectionSubmitRequest): Response<ResponseBody>
 }

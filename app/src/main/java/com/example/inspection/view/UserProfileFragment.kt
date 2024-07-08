@@ -36,7 +36,7 @@ class UserProfileFragment : Fragment() {
         }
 
         binding.btnRandomInspection.setOnClickListener {
-            if(AppUtils.isNetworkAvailable(this.requireContext())){
+            if(!AppUtils.isNetworkAvailable(this.requireContext())){
                 Toast.makeText(activity, "No internet connection", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }

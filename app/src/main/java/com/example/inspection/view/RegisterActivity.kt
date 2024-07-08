@@ -36,7 +36,7 @@ class RegisterActivity : AppCompatActivity(){
                 return@setOnClickListener
             }
 
-            if(AppUtils.isNetworkAvailable(this)){
+            if(!AppUtils.isNetworkAvailable(this)){
                 Toast.makeText(this, "No internet connection", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }

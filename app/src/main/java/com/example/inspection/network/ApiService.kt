@@ -13,6 +13,9 @@ interface ApiService {
     @GET("api/inspections/start")
     suspend fun startInspection(): InspectionResponse
 
+    @GET("api/random_inspection")
+    suspend fun getRandomInspection(): InspectionResponse
+
     @POST("api/register")
     suspend fun registerUser(@Body loginRequest: LoginRequest): Response<ResponseBody>
 

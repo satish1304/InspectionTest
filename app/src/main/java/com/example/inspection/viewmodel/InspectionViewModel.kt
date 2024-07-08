@@ -45,6 +45,17 @@ class InspectionViewModel(application: Application) : AndroidViewModel(applicati
         }
     }
 
+    fun getRandomInspection() {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val response = RetrofitInstance.api.getRandomInspection()
+                inspectionRepository.insertInspection(response.inspection)
+            }catch (e: Exception){
+                e.printStackTrace()
+            }
+        }
+    }
+
     fun submitInspection(inspectionSubmitRequest : InspectionSubmitRequest) {
         viewModelScope.launch(Dispatchers.IO) {
             inspectionRepository.submitInspection(inspectionSubmitRequest)

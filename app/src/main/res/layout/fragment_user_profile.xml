@@ -18,11 +18,23 @@
         android:layout_marginTop="20dp"
         android:text="Username"/>
 
+    <Button
+        android:id="@+id/btnRandomInspection"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tvRegisterEmail"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textAllCaps="false"
+        android:layout_marginTop="20dp"
+        android:text="Generate Random Inspection"
+        />
+
      <Button
          android:id="@+id/btnLogout"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
-         app:layout_constraintTop_toBottomOf="@id/tvRegisterEmail"
+         app:layout_constraintTop_toBottomOf="@id/btnRandomInspection"
          app:layout_constraintStart_toStartOf="parent"
          app:layout_constraintEnd_toEndOf="parent"
          android:layout_marginTop="20dp"

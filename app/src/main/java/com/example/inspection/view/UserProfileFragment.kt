@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.inspection.databinding.FragmentUserProfileBinding
 import com.example.inspection.viewmodel.InspectionViewModel
@@ -12,6 +13,11 @@ import com.example.inspection.viewmodel.InspectionViewModel
 class UserProfileFragment : Fragment() {
 
     private lateinit var binding : FragmentUserProfileBinding
+
+
+    private val  inspectionViewModel by lazy {
+        InspectionViewModel(this.requireActivity().application)
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentUserProfileBinding.inflate(layoutInflater,container,false)
@@ -26,6 +32,11 @@ class UserProfileFragment : Fragment() {
             val intent = Intent(requireContext(), LoginActivity::class.java)
             startActivity(intent)
             activity?.finish()
+        }
+
+        binding.btnRandomInspection.setOnClickListener {
+            inspectionViewModel.getRandomInspection()
+            Toast.makeText(requireContext(), "Random inspection saved into Draft Inspection", Toast.LENGTH_SHORT).show()
         }
     }
 }
